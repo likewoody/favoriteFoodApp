@@ -1,6 +1,6 @@
+import 'package:favorite_food_list_app/view/%08mylist/mylist.dart';
 import 'package:favorite_food_list_app/view/world_list.dart';
-import 'package:favorite_food_list_app/view/our_list.dart';
-import 'package:favorite_food_list_app/view/myList.dart';
+import 'package:favorite_food_list_app/view/ourlist/our_list.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -14,20 +14,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
 
   late TabController tabController;
   // image path 받을 것임
-  late String name, phone, lat, lng, img, rate, inputDate;
+  // late String name, phone, lat, lng, img, rate, inputDate;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
-    name = '';
-    phone = '';
-    lat = '';
-    lng = '';
-    img = '';
-    rate = '';
-    inputDate = '';
-    // dateSet();
+    // name = '';
+    // phone = '';
+    // lat = '';
+    // lng = '';
+    // img = '';
+    // rate = '';
+    // inputDate = '';
   }
 
   @override
@@ -35,10 +34,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
     tabController.dispose();
     super.dispose();
   }
-
-  // dateSet() {
-  //   now = ('${now.year}')
-  // }
 
   @override
   Widget build(BuildContext context) {

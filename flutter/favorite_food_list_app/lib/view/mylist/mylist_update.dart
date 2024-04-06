@@ -70,22 +70,6 @@ class _MyListUpdateState extends State<MyListUpdate> {
     }
   }
 
-  // insertData() async{
-  //   File imgFile = File(imageFile!.path);
-  //   Uint8List getImage = await imgFile.readAsBytes();
-
-  //   FoodList foodList = FoodList(
-  //     name: nameController.text.toString(), 
-  //     phone: phoneController.text.toString(), 
-  //     lat: latController.text.toString(), 
-  //     lng: lngController.text.toString(), 
-  //     rate: rateController.text.toString(), 
-  //     inputDate: _now().toString(),
-  //     sqlImg: getImage,
-  //   );
-  //   await handler.insertFoodList(foodList);
-  //   _showDialog();
-  // }
   updateData() async{
     Uint8List getImage;
 

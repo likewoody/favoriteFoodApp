@@ -10,7 +10,7 @@ class DataBaseHandler{
       join(path, 'favoritefood.db'),
       onCreate: (db, version) async{
         await db.execute(
-          "create table list (id integer primary key autoincrement, name text, phone text, lat text, lng text, img text, rate text, inputDate text, sqlImg blob)"
+          "create table list (id integer primary key autoincrement, name text, phone text, lat text, lng text, sqlImg blob, rate text, inputDate text)"
         );
       },
       version: 1,

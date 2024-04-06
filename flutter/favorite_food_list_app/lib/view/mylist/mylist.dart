@@ -1,10 +1,10 @@
-import 'package:favorite_food_list_app/view/mylist_insert.dart';
-import 'package:favorite_food_list_app/view/mylist_update.dart';
+import 'package:favorite_food_list_app/view/%08mylist/mylist_gps.dart';
+import 'package:favorite_food_list_app/view/%08mylist/mylist_insert.dart';
+import 'package:favorite_food_list_app/view/%08mylist/mylist_update.dart';
 import 'package:favorite_food_list_app/viewmodel/db_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'dart:typed_data';
 
 class MyList extends StatefulWidget {
   const MyList({super.key});
@@ -18,8 +18,6 @@ class _MyListState extends State<MyList> {
   // Property
   late DataBaseHandler handler;
 
-
-
   @override
   void initState() {
     super.initState();
@@ -32,7 +30,6 @@ class _MyListState extends State<MyList> {
     handler.queryFoodList();
     setState(() {});
   }
-
 
   // ---- Dialog ----
   _showDeleteDialog() {
@@ -50,9 +47,6 @@ class _MyListState extends State<MyList> {
       ],
     );
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +97,15 @@ class _MyListState extends State<MyList> {
                         ],
                       )!.then((value) => rebuildData());
                     },
+                    onLongPress: () => Get.to(
+                      const MylistGPS(),
+                      arguments: [
+                        snapshot.data![index].name,
+                        snapshot.data![index].lat,
+                        snapshot.data![index].lng,
+                        snapshot.data![index].id,
+                      ],
+                    ),
                     child: Card(
                       child: Column(
                         children: [
