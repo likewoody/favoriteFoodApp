@@ -2,6 +2,6 @@
 
 1. My Food List
 
-2. Domestic Food List
+2. Our Food List
 
-3. Abroad Food List
+3. World Food List
