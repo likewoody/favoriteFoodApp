@@ -47,6 +47,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
         title: const Text('Favorite Food List'),
       ),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: const [
           MyList(),

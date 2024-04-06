@@ -7,10 +7,10 @@ class DataBaseHandler{
   Future<Database> initializeDB() async{
     String path = await getDatabasesPath();
     return openDatabase(
-      join(path, 'favoritefoodlist.db'),
+      join(path, 'favoritefood.db'),
       onCreate: (db, version) async{
         await db.execute(
-          "create table list (id integer primary key autoincrement, name text, phone text, lat text, lng text, img text, rate text, inputDate text)"
+          "create table list (id integer primary key autoincrement, name text, phone text, lat text, lng text, img text, rate text, inputDate text, sqlImg blob)"
         );
       },
       version: 1,
