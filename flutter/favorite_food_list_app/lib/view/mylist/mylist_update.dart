@@ -75,10 +75,10 @@ class _MyListUpdateState extends State<MyListUpdate> {
   updateData() async{
     Uint8List getImage;
 
-    File imgFile = File(imageFile!.path);
-    if (imgFile == null) {
+    if(imageFile == null) {
       getImage = img;
-    } else{
+    }else{
+      File imgFile = File(imageFile!.path);
       getImage = await imgFile.readAsBytes();
     }
 
@@ -150,7 +150,9 @@ class _MyListUpdateState extends State<MyListUpdate> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Update My Food'),
+          title: const Text('수정하기'),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -170,7 +172,7 @@ class _MyListUpdateState extends State<MyListUpdate> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   child: Center(
                     child: imageFile == null
                     ? Image.memory(img)

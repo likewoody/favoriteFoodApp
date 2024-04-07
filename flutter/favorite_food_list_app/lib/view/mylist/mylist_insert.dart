@@ -72,6 +72,7 @@ class _MyListInsertState extends State<MyListInsert> {
       setState(() {});
     }
   }
+  
 
   insertData() async{
     File imgFile = File(imageFile!.path);
@@ -144,7 +145,9 @@ class _MyListInsertState extends State<MyListInsert> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add Food List'),
+          title: const Text('추가하기'),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -164,7 +167,7 @@ class _MyListInsertState extends State<MyListInsert> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   child: Center(
                     child: imageFile == null
                     ? const Text('Image is not selected')

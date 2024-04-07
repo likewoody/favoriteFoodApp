@@ -56,11 +56,12 @@ class _OurListUpdateState extends State<OurListUpdate> {
     imgPath = values[4];
     rateController.text = values[5];
     id = values[6];
+
+    
   }
 
 
   // ---- Functions ----
-
   // 이미지 선택
   getImageFromGallery(imageSource) async{
     final XFile? pickedFile = await picker.pickImage(source: imageSource);
@@ -138,7 +139,9 @@ class _OurListUpdateState extends State<OurListUpdate> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Update Our Food'),
+          title: const Text('수정하기'),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

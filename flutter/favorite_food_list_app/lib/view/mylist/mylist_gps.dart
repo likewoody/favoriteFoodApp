@@ -89,6 +89,8 @@ class _MylistGPSState extends State<MylistGPS> {
     return Scaffold(
       appBar: AppBar(
         title: Text('$name 위치'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       body: flutterMap(),
     );

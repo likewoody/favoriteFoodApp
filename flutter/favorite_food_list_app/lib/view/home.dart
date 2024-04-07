@@ -13,20 +13,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
 
   late TabController tabController;
-  // image path 받을 것임
-  // late String name, phone, lat, lng, img, rate, inputDate;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
-    // name = '';
-    // phone = '';
-    // lat = '';
-    // lng = '';
-    // img = '';
-    // rate = '';
-    // inputDate = '';
   }
 
   @override
@@ -39,7 +30,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorite Food List'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        title: const Text('맛집 리스트 모음'),
       ),
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),

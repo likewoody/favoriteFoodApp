@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_insert.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_update.dart';
 import 'package:flutter/material.dart';
@@ -139,52 +138,54 @@ class _OurListState extends State<OurList> {
                         data[index]['id'],
                       ],
                     ),
-                    child: Card(
-                      child: Row(
-                        children: [
-                          data[index]['imgPath'] == null
-                          ? const Text('No Image')
-                          : Image.network(
-                            data[index]['imgPath'],
-                            width: 100,
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const Text(
-                                            '이름 :\n',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text('  ${data[index]['name']}\n'),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text(
-                                              '  전화번호 :',
+                    child: Container(
+                      height: 150,
+                      child: Card(
+                        color: Theme.of(context).colorScheme.secondaryContainer,
+                        child: Row(
+                          children: [
+                            Image.network(
+                              data[index]['imgPath'],
+                              width: 100,
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Text(
+                                              '이름 :\n',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            Text('  ${data[index]['phone']}')
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  
-                                  
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
+                                            Text('  ${data[index]['name']}\n'),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Text(
+                                                '  전화번호 :',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text('  ${data[index]['phone']}')
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    
+                                    
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -145,7 +145,9 @@ class _WorldListInsertState extends State<WorldListInsert> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add Food List'),
+          title: const Text('추가하기'),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

@@ -116,30 +116,39 @@ class _MyListState extends State<MyList> {
                     ),
                     child: Container(
                       height: 150,
+                      
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0,5,0,5),
                         child: Card(
+                          color: Theme.of(context).colorScheme.secondaryContainer,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Row(
                                 children: [
-                                    Image.memory(
-                                      snapshot.data![index].sqlImg ?? Uint8List(0),
-                                      width: 100,
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.memory(
+                                        snapshot.data![index].sqlImg ?? Uint8List(0),
+                                        width: 100,
+                                      ),
                                     ),
                                   Column(
                                     children: [
                                       Row(
                                         children: [
                                           const Text(
-                                            '        이름 :\n',
+                                            '이름 :\n',
                                             style: TextStyle(
-                                              fontWeight: FontWeight.bold
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
                                             ),
                                           ),
                                           Text(
                                             '  ${snapshot.data![index].name}\n',
+                                            style: const TextStyle(
+                                              fontSize: 15,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -148,11 +157,15 @@ class _MyListState extends State<MyList> {
                                           const Text(
                                             '  전화번호 :',
                                             style: TextStyle(
-                                              fontWeight: FontWeight.bold
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
                                             ),
                                           ),
                                           Text(
                                             "  ${snapshot.data![index].phone}",
+                                            style: const TextStyle(
+                                              fontSize: 15,
+                                            ),
                                           ),
                                         ],
                                       ),

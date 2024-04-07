@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
@@ -38,9 +37,6 @@ class _OurListInsertState extends State<OurListInsert> {
     inputDate = '';
   }
 
-
-  // ---- Functions ----
-
   // 이미지 선택
   getImageFromGallery(imageSource) async{
     final XFile? pickedFile = await picker.pickImage(source: imageSource);
@@ -54,18 +50,22 @@ class _OurListInsertState extends State<OurListInsert> {
 
   insertData() async{
     File imgFile = File(imageFile!.path);
-    Uint8List img = await imageFile!.readAsBytes();
+    Uint8List img = await imgFile!.readAsBytes();
 
-    var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistInsert.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&img=${img}&rate=${rateController.text}&inputDate=${_now()}');
-    var response = await http.get(url);
+    
 
-    var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
-    var result = dataConvertedJSON['result'];
-    setState(() {});
-    if (result == 'OK') {
-      _showDialog();
-    }
+    // print(img);
+    // var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistInsert.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&img=${imgFile}&rate=${rateController.text}&inputDate=${_now()}');
+    // var response = await http.get(url);
+
+    // var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
+    // var result = dataConvertedJSON['result'];
+    // setState(() {});
+    // if (result == 'OK') {
+      // _showDialog();
+    // }
   }
+
 
   // ---- date format ----
   String _now() {
@@ -121,7 +121,9 @@ class _OurListInsertState extends State<OurListInsert> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add Food List'),
+          title: const Text('추가하기'),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

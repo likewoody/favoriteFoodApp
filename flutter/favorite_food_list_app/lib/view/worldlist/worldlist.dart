@@ -78,6 +78,7 @@ Widget _buildItemWidget(context, doc) {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0,5,0,5),
         child: Card(
+          color: Theme.of(context).colorScheme.secondaryContainer,
           child: ListTile(
             title: Row(
               children: [

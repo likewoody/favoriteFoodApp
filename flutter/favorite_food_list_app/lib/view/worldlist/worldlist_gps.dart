@@ -81,6 +81,8 @@ class _WorldListGPSState extends State<WorldListGPS> {
     return Scaffold(
       appBar: AppBar(
         title: Text("${values[0]}의 위치"),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       body: flutterMap(),
     );
