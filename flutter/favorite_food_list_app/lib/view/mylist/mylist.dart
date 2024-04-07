@@ -114,48 +114,55 @@ class _MyListState extends State<MyList> {
                         snapshot.data![index].id,
                       ],
                     ),
-                    child: Card(
-                      child: Column(
-                        children: [
-                          Row(
+                    child: Container(
+                      height: 150,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0,5,0,5),
+                        child: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                                Image.memory(
-                                  snapshot.data![index].sqlImg ?? Uint8List(0),
-                                  width: 100,
-                                ),
-                              Column(
+                              Row(
                                 children: [
-                                  Row(
+                                    Image.memory(
+                                      snapshot.data![index].sqlImg ?? Uint8List(0),
+                                      width: 100,
+                                    ),
+                                  Column(
                                     children: [
-                                      const Text(
-                                        '이름 :\n',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold
-                                        ),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            '        이름 :\n',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          Text(
+                                            '  ${snapshot.data![index].name}\n',
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        '  ${snapshot.data![index].name}\n',
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        '전화번호 :',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold
-                                        ),
-                                      ),
-                                      Text(
-                                        "  ${snapshot.data![index].phone}",
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            '  전화번호 :',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          Text(
+                                            "  ${snapshot.data![index].phone}",
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ],
-                              ),
+                              )
                             ],
-                          )
-                        ],
+                          ),
+                        ),
                       ),
                     ),
                   ),

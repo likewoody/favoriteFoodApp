@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_insert.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_update.dart';
 import 'package:flutter/material.dart';
@@ -35,11 +36,6 @@ class _OurListState extends State<OurList> {
     var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistSearch.jsp');
     var response = await http.get(url);
     // print(response.body);
-
-    // blob 타입의 이미지 '@' 때문에 decode가 안된다.
-    // @ 문자 제거
-    // String responseBody = utf8.decode(response.bodyBytes);
-    // responseBody = responseBody.replaceAll(r'@', '');
 
     var dataConvertedJSON = json.decode(response.body);
     var result = dataConvertedJSON['result'];
@@ -78,7 +74,6 @@ class _OurListState extends State<OurList> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +105,6 @@ class _OurListState extends State<OurList> {
                     data[index]['lng'],
                     data[index]['rate'],
                     data[index]['id'],
-                    // data[index]['img'],
                   ],
                 )!.then((value) {
                   data = [];
@@ -130,42 +124,69 @@ class _OurListState extends State<OurList> {
                     ),
                   ],
                 ),
-                child: Card(
-                  child: Column(
-                    children: [
-                      Row(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0,5,0,5),
+                  child: GestureDetector(
+                    onTap: () => Get.to(
+                      const OurListUpdate(),
+                      arguments: [
+                        data[index]['name'],
+                        data[index]['phone'],
+                        data[index]['lat'],
+                        data[index]['lng'],
+                        data[index]['imgPath'],
+                        data[index]['rate'],
+                        data[index]['id'],
+                      ],
+                    ),
+                    child: Card(
+                      child: Row(
                         children: [
+                          data[index]['imgPath'] == null
+                          ? const Text('No Image')
+                          : Image.network(
+                            data[index]['imgPath'],
+                            width: 100,
+                          ),
                           Column(
                             children: [
                               Row(
                                 children: [
-                                  const Text(
-                                    '이름 :\n',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text('  ${data[index]['name']}\n'),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                      '전화번호 :',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            '이름 :\n',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text('  ${data[index]['name']}\n'),
+                                        ],
                                       ),
-                                    ),
-                                    Text('  ${data[index]['phone']}')
+                                      Row(
+                                        children: [
+                                          const Text(
+                                              '  전화번호 :',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text('  ${data[index]['phone']}')
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  
+                                  
                                 ],
                               )
                             ],
                           ),
-                          
-                          
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
               ),

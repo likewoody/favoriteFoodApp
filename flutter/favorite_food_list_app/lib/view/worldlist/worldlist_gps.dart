@@ -7,53 +7,47 @@ import 'package:latlong2/latlong.dart' as latlng;
 /*
     Date: 2024-04-07
     Author : Woody Jo
-    Description : Favorite Food Mylist View GPS map Page, get lat,lun
+    Description : Favorite Food Worldlist View GPS map Page, get lat,lun
                   datas and then show GPS map 
 */
 
-class MylistGPS extends StatefulWidget {
-  const MylistGPS({super.key});
+class WorldListGPS extends StatefulWidget {
+  const WorldListGPS({super.key});
 
   @override
-  State<MylistGPS> createState() => _MylistGPSState();
+  State<WorldListGPS> createState() => _WorldListGPSState();
 }
 
-class _MylistGPSState extends State<MylistGPS> {
+class _WorldListGPSState extends State<WorldListGPS> {
 
+  // Property
   var values = Get.arguments ?? '';
-
-  late Position currentPosition;
-  late String name;
   late double lat;
   late double lng;
-  late MapController mapController; // flutter_map
+  late Position currentPosition;
+  late MapController mapController;
 
   @override
   void initState() {
     super.initState();
-    name = values[0];
+    mapController = MapController();
     lat = double.parse(values[1]);
     lng = double.parse(values[2]);
-    mapController = MapController();  
   }
 
-  // ---- Functions -----
-
-  // ============================
-  // --------- 화면 구상 ---------
-  // ============================
+  // --- Function ----
   Widget flutterMap() {
     return FlutterMap(
       mapController: mapController,
       options: MapOptions(
         initialCenter: latlng.LatLng(lat, lng),
-        initialZoom: 17.0
+        initialZoom: 17.0,
       ), 
       children: [
-        TileLayer( // 화면 그림 그리는 친구
+        TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         ),
-        MarkerLayer( // 위치 표시
+        MarkerLayer(
           markers: [
             Marker(
               width: 80,
@@ -62,7 +56,7 @@ class _MylistGPSState extends State<MylistGPS> {
               child: Column(
                 children: [
                   Text(
-                    name,
+                    values[1],
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black
@@ -76,19 +70,17 @@ class _MylistGPSState extends State<MylistGPS> {
                 ],
               ),
             ),
-          ]
+          ],
         ),
-      ],
+      ]
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$name 위치'),
+        title: Text("${values[0]}의 위치"),
       ),
       body: flutterMap(),
     );

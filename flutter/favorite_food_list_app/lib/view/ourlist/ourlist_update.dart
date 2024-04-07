@@ -26,7 +26,7 @@ class _OurListUpdateState extends State<OurListUpdate> {
 
   // Property
   late String inputDate;
-  // late Uint8List img;
+  late String imgPath;
 
   late int id;
 
@@ -53,9 +53,9 @@ class _OurListUpdateState extends State<OurListUpdate> {
     phoneController.text = values[1];
     latController.text = values[2];
     lngController.text = values[3];
-    // img = values[4];
-    rateController.text = values[4];
-    id = values[5];
+    imgPath = values[4];
+    rateController.text = values[5];
+    id = values[6];
   }
 
 
@@ -73,14 +73,6 @@ class _OurListUpdateState extends State<OurListUpdate> {
   }
 
   updateData() async{
-    // Uint8List getImage;
-
-    // File imgFile = File(imageFile!.path);
-    // if (imgFile == null) {
-    //   getImage = img;
-    // } else{
-    //   getImage = await imgFile.readAsBytes();
-    // }
 
     var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistUpdate.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&rate=${rateController.text}&inputDate=${_now()}&id=$id');
     var response = await http.get(url);
@@ -169,7 +161,7 @@ class _OurListUpdateState extends State<OurListUpdate> {
                   color: Theme.of(context).colorScheme.tertiaryContainer,
                   child: Center(
                     child: imageFile == null
-                    ? Text('input image data')//Image.memory(img)
+                    ? Image.network(imgPath)
                     : Image.file(File(imageFile!.path)),
                   ),
                 ),

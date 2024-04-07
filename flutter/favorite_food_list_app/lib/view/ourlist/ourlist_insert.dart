@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +35,6 @@ class _OurListInsertState extends State<OurListInsert> {
     latController = TextEditingController();
     lngController = TextEditingController();
     rateController = TextEditingController();
-
     inputDate = '';
   }
 
@@ -53,7 +53,10 @@ class _OurListInsertState extends State<OurListInsert> {
   }
 
   insertData() async{
-    var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistInsert.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&rate=${rateController.text}&inputDate=${_now()}');
+    File imgFile = File(imageFile!.path);
+    Uint8List img = await imageFile!.readAsBytes();
+
+    var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistInsert.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&img=${img}&rate=${rateController.text}&inputDate=${_now()}');
     var response = await http.get(url);
 
     var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));

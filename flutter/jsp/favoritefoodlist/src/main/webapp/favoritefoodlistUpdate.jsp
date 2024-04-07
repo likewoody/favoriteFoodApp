@@ -42,6 +42,7 @@
 		ps.setString(6, inputDate);
 		ps.setString(7, id);
 		
+		
 		ps.executeUpdate();
 %>
 		{"result":"OK"}

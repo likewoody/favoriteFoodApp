@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_food_list_app/model/foodList.dart';
+import 'package:favorite_food_list_app/view/worldlist/worldlist_gps.dart';
 import 'package:favorite_food_list_app/view/worldlist/worldlist_insert.dart';
 import 'package:favorite_food_list_app/view/worldlist/worldlist_update.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -66,41 +67,52 @@ Widget _buildItemWidget(context, doc) {
           doc['rate'],
         ],
       ),
-      child: Card(
-        child: ListTile(
-          title: Row(
-            children: [
-              Image.network(
-                foodList.img ?? "",
-                width: 70,
-              ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      const Text(
-                        '\n이름 :\n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold
+      onLongPress: () => Get.to(
+        const WorldListGPS(),
+        arguments: [
+          doc['name'],
+          doc['lat'],
+          doc['lng'],
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0,5,0,5),
+        child: Card(
+          child: ListTile(
+            title: Row(
+              children: [
+                Image.network(
+                  foodList.img ?? "",
+                  width: 100,
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          '\n     이름 :\n',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                          ),
                         ),
-                      ),
-                      Text("  ${foodList.name}")
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        '전화번호 :\n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold
+                        Text(" ${foodList.name}")
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          '  전화번호 :\n',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                          ),
                         ),
-                      ),
-                      Text("  ${foodList.phone}\n")
-                    ],
-                  ),
-                ],
-              )
-            ],
+                        Text(" ${foodList.phone}\n")
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

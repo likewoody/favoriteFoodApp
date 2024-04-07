@@ -6,6 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+/*
+    Date: 2024-04-07
+    Author : Woody Jo
+    Description : Favorite Food Worldlist View Update Page with Firebase
+*/
+
 class WorldLIstUpdate extends StatefulWidget {
   const WorldLIstUpdate({super.key});
 
@@ -76,7 +82,7 @@ class _WorldLIstUpdateState extends State<WorldLIstUpdate> {
         'phone':phoneController.text,
         'lat':latController.text,
         'lng':lngController.text,
-        'image':image,
+        'img':image,
         'rate':rateController.text,
         'inputDate':_now(),
       });
@@ -90,7 +96,7 @@ class _WorldLIstUpdateState extends State<WorldLIstUpdate> {
     print(values[1]);
     final firebaseStorage = FirebaseStorage.instance
       .ref()
-      .child('list')
+      .child('images')
       .child('${values[1]}.png');
     await firebaseStorage.delete();
     
@@ -103,14 +109,18 @@ class _WorldLIstUpdateState extends State<WorldLIstUpdate> {
 
   // second
   Future<String> preparingImage() async{
-    final firebaseStorage = FirebaseStorage.instance
+    if (imgFile == null) {
+      return img;
+    }else {
+      final firebaseStorage = FirebaseStorage.instance
       .ref()
       .child('images')
       .child('${nameController.text}.png');
-    await firebaseStorage.putFile(imgFile!);
+      await firebaseStorage.putFile(imgFile!);
 
-    String downloadURL = await firebaseStorage.getDownloadURL();
-    return downloadURL;
+      String downloadURL = await firebaseStorage.getDownloadURL();
+      return downloadURL;
+    }
   }
 
   // Date Format
