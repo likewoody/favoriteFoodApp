@@ -21,24 +21,26 @@
 - SQLite
 
 <br>
+
 2. 우리의 맛집 리스트
 - MySQL
 
 <br>
+
 3. 세계의 맛집 리스트
 - Firebase
 
-<hr>
+<br>
 
 📦
 image_picker: ^1.0.7
-<br>
+<br><br>
 
 get: ^4.6.6
 
 <br>
-
-#### 맛집 리스트 앱 만들기 
+<br>
+#### GPS
 geocoding: ^3.0.0
 
 geolocator: ^11.0.0
@@ -46,24 +48,23 @@ geolocator: ^11.0.0
 flutter_map: ^6.1.0
 
 latlong2: ^0.9.1
-<br>
+<br><br>
 
 #### HTTP
 http: ^1.2.1
-<br>
+<br><br>
 
 #### SQLite
 sqflite: ^2.3.3
-
 <br>
 path: ^1.9.0
-<br>
-
-#### 맛집 리스트 앱 만들기 
+<br><br>
 flutter_slidable: ^3.1.0
-
+<br>
+<br>
 shared_preferences: ^2.2.2
-
+<br><br>
+#### Firebase 
 firebase_storage: ^11.7.0
 
 cloud_firestore: ^4.16.0
