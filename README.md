@@ -40,6 +40,7 @@ get: ^4.6.6
 
 <br>
 <br>
+
 #### GPS
 geocoding: ^3.0.0
 
@@ -56,7 +57,7 @@ http: ^1.2.1
 
 #### SQLite
 sqflite: ^2.3.3
-<br>
+<br><br>
 path: ^1.9.0
 <br><br>
 flutter_slidable: ^3.1.0
