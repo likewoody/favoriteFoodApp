@@ -96,6 +96,7 @@ class _MyListUpdateState extends State<MyListUpdate> {
       _showDialog();
   }
 
+  // Date Format
   String _now() {
     final DateTime now = DateTime.now();
     inputDate =
@@ -149,7 +150,7 @@ class _MyListUpdateState extends State<MyListUpdate> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add Food List'),
+          title: const Text('Update My Food'),
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

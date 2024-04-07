@@ -6,9 +6,10 @@ class FoodList{
   late String phone; // 전화번호
   late String lat; // 위도 ㅡ
   late String lng; // 경도 ㅣ
-  late Uint8List sqlImg; // SQLite img
+  Uint8List? sqlImg; // SQLite img
   late String rate; // 평가
   late String inputDate; // 입력 일
+  String? img;
 
   FoodList({
     this.id,
@@ -16,9 +17,10 @@ class FoodList{
     required this.phone,
     required this.lat,
     required this.lng,
-    required this.sqlImg,
+    this.sqlImg,
     required this.rate,
     required this.inputDate,
+    this.img,
   });
 
   FoodList.fromMap(Map<String, dynamic> res)
@@ -29,5 +31,6 @@ class FoodList{
       lng = res['lng'],
       sqlImg = res['sqlImg'],
       rate = res['rate'],
-      inputDate = res['inputDate'];
+      inputDate = res['inputDate'],
+      img = res['img'];
 }

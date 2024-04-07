@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:favorite_food_list_app/view/ourlist/ourlist_insert.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_update.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,13 @@ class _OurListState extends State<OurList> {
     var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistSearch.jsp');
     var response = await http.get(url);
     // print(response.body);
-    var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
+
+    // blob 타입의 이미지 '@' 때문에 decode가 안된다.
+    // @ 문자 제거
+    // String responseBody = utf8.decode(response.bodyBytes);
+    // responseBody = responseBody.replaceAll(r'@', '');
+
+    var dataConvertedJSON = json.decode(response.body);
     var result = dataConvertedJSON['result'];
     data.addAll(result);
     setState(() {});

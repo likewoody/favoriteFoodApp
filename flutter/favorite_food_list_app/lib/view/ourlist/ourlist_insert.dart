@@ -14,12 +14,7 @@ class OurListInsert extends StatefulWidget {
 
 class _OurListInsertState extends State<OurListInsert> {
   
-   // Property
-  late String name;
-  late String phone;
-  late String lat;
-  late String lng;
-  late String rate;
+  // Property
   late String inputDate;
 
   late TextEditingController nameController;
@@ -40,11 +35,6 @@ class _OurListInsertState extends State<OurListInsert> {
     lngController = TextEditingController();
     rateController = TextEditingController();
 
-    name = '';
-    phone = '';
-    lat = '';
-    lng = '';
-    rate = '';
     inputDate = '';
   }
 

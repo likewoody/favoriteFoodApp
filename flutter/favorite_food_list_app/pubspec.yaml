@@ -47,12 +47,12 @@ dependencies:
   sqflite: ^2.3.3
   path: ^1.9.0
   flutter_slidable: ^3.1.0
-  firebase_core: ^2.28.0
+  shared_preferences: ^2.2.2
+  firebase_storage: ^11.7.0
   cloud_firestore: ^4.16.0
+  firebase_core: ^2.28.0
   firebase_analytics: ^10.10.0
   firebase_database: ^10.5.0
-  firebase_storage: ^11.7.0
-  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

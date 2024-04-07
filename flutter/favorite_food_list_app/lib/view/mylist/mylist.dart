@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:favorite_food_list_app/view/%08mylist/mylist_gps.dart';
 import 'package:favorite_food_list_app/view/%08mylist/mylist_insert.dart';
 import 'package:favorite_food_list_app/view/%08mylist/mylist_update.dart';
@@ -118,7 +120,7 @@ class _MyListState extends State<MyList> {
                           Row(
                             children: [
                                 Image.memory(
-                                  snapshot.data![index].sqlImg,
+                                  snapshot.data![index].sqlImg ?? Uint8List(0),
                                   width: 100,
                                 ),
                               Column(
