@@ -1,30 +1,20 @@
+import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-
-import 'package:favorite_food_list_app/model/foodList.dart';
-import 'package:favorite_food_list_app/viewmodel/db_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
-/*
-    Date: 2024-04-07
-    Author : Woody Jo
-    Description : Favorite Food Mylist View insert Page with SQLite DB
-                  and insert image
-*/
-
-class MyListInsert extends StatefulWidget {
-  const MyListInsert({super.key});
+class OurListInsert extends StatefulWidget {
+  const OurListInsert({super.key});
 
   @override
-  State<MyListInsert> createState() => _MyListInsertState();
+  State<OurListInsert> createState() => _OurListInsertState();
 }
 
-class _MyListInsertState extends State<MyListInsert> {
-
-  // Property
-  late DataBaseHandler handler;
+class _OurListInsertState extends State<OurListInsert> {
+  
+   // Property
   late String name;
   late String phone;
   late String lat;
@@ -44,7 +34,6 @@ class _MyListInsertState extends State<MyListInsert> {
   @override
   void initState() {
     super.initState();
-    handler = DataBaseHandler();
     nameController = TextEditingController();
     phoneController = TextEditingController();
     latController = TextEditingController();
@@ -74,22 +63,18 @@ class _MyListInsertState extends State<MyListInsert> {
   }
 
   insertData() async{
-    File imgFile = File(imageFile!.path);
-    Uint8List getImage = await imgFile.readAsBytes();
-    
-    FoodList foodList = FoodList(
-      name: nameController.text.toString(), 
-      phone: phoneController.text.toString(), 
-      lat: latController.text.toString(), 
-      lng: lngController.text.toString(), 
-      rate: rateController.text.toString(), 
-      inputDate: _now().toString(),
-      sqlImg: getImage,
-    );
-    await handler.insertFoodList(foodList);
-    _showDialog();
+    var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistInsert.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&rate=${rateController.text}&inputDate=${_now()}');
+    var response = await http.get(url);
+
+    var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
+    var result = dataConvertedJSON['result'];
+    setState(() {});
+    if (result == 'OK') {
+      _showDialog();
+    }
   }
 
+  // ---- date format ----
   String _now() {
     final DateTime now = DateTime.now();
     inputDate =
@@ -163,7 +148,7 @@ class _MyListInsertState extends State<MyListInsert> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   child: Center(
                     child: imageFile == null
                     ? const Text('Image is not selected')

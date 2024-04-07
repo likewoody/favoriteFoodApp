@@ -4,6 +4,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart' as latlng;
 
+/*
+    Date: 2024-04-07
+    Author : Woody Jo
+    Description : Favorite Food Mylist View GPS map Page, get lat,lun
+                  datas and then show GPS map 
+*/
+
 class MylistGPS extends StatefulWidget {
   const MylistGPS({super.key});
 

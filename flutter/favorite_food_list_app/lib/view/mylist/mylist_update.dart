@@ -7,6 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+/*
+    Date: 2024-04-07
+    Author : Woody Jo
+    Description : Favorite Food Mylist View Update Page with SQLite
+                  update image as well
+*/
+
+
 class MyListUpdate extends StatefulWidget {
   const MyListUpdate({super.key});
 
@@ -17,14 +25,8 @@ class MyListUpdate extends StatefulWidget {
 class _MyListUpdateState extends State<MyListUpdate> {
   // Property
   late DataBaseHandler handler;
-  late String name;
-  late String phone;
-  late String lat;
-  late String lng;
-  late String rate;
   late String inputDate;
   late Uint8List img;
-
   late int id;
 
   late TextEditingController nameController;

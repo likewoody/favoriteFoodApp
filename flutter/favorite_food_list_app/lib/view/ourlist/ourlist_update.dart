@@ -1,36 +1,34 @@
+import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:favorite_food_list_app/model/foodList.dart';
-import 'package:favorite_food_list_app/viewmodel/db_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+
+class OurListUpdate extends StatefulWidget {
+  const OurListUpdate({super.key});
+
+  @override
+  State<OurListUpdate> createState() => _OurListUpdateState();
+}
+
 
 /*
     Date: 2024-04-07
     Author : Woody Jo
-    Description : Favorite Food Mylist View insert Page with SQLite DB
-                  and insert image
+    Description : Favorite Food Ourlist View Update Page with MySQL
+                  update image as well
 */
 
-class MyListInsert extends StatefulWidget {
-  const MyListInsert({super.key});
+class _OurListUpdateState extends State<OurListUpdate> {
 
-  @override
-  State<MyListInsert> createState() => _MyListInsertState();
-}
-
-class _MyListInsertState extends State<MyListInsert> {
 
   // Property
-  late DataBaseHandler handler;
-  late String name;
-  late String phone;
-  late String lat;
-  late String lng;
-  late String rate;
   late String inputDate;
+  // late Uint8List img;
+
+  late int id;
 
   late TextEditingController nameController;
   late TextEditingController phoneController;
@@ -38,25 +36,26 @@ class _MyListInsertState extends State<MyListInsert> {
   late TextEditingController lngController;
   late TextEditingController rateController;
 
+  var values = Get.arguments ?? '';
   XFile? imageFile;
   final ImagePicker picker = ImagePicker();
 
   @override
   void initState() {
     super.initState();
-    handler = DataBaseHandler();
     nameController = TextEditingController();
     phoneController = TextEditingController();
     latController = TextEditingController();
     lngController = TextEditingController();
     rateController = TextEditingController();
 
-    name = '';
-    phone = '';
-    lat = '';
-    lng = '';
-    rate = '';
-    inputDate = '';
+    nameController.text = values[0];
+    phoneController.text = values[1];
+    latController.text = values[2];
+    lngController.text = values[3];
+    // img = values[4];
+    rateController.text = values[4];
+    id = values[5];
   }
 
 
@@ -73,21 +72,25 @@ class _MyListInsertState extends State<MyListInsert> {
     }
   }
 
-  insertData() async{
-    File imgFile = File(imageFile!.path);
-    Uint8List getImage = await imgFile.readAsBytes();
-    
-    FoodList foodList = FoodList(
-      name: nameController.text.toString(), 
-      phone: phoneController.text.toString(), 
-      lat: latController.text.toString(), 
-      lng: lngController.text.toString(), 
-      rate: rateController.text.toString(), 
-      inputDate: _now().toString(),
-      sqlImg: getImage,
-    );
-    await handler.insertFoodList(foodList);
-    _showDialog();
+  updateData() async{
+    // Uint8List getImage;
+
+    // File imgFile = File(imageFile!.path);
+    // if (imgFile == null) {
+    //   getImage = img;
+    // } else{
+    //   getImage = await imgFile.readAsBytes();
+    // }
+
+    var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistUpdate.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&rate=${rateController.text}&inputDate=${_now()}&id=$id');
+    var response = await http.get(url);
+
+    var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
+    var result = dataConvertedJSON['result'];
+    setState(() {});
+    if (result == 'OK') {
+      _showDialog();
+    }
   }
 
   String _now() {
@@ -124,7 +127,7 @@ class _MyListInsertState extends State<MyListInsert> {
   _showDialog() {
     Get.defaultDialog(
       title: '알림',
-      middleText: '입력이 완료 되었습니다.',
+      middleText: '수정이 완료 되었습니다.',
       actions: [
         TextButton(
           onPressed: () {
@@ -166,7 +169,7 @@ class _MyListInsertState extends State<MyListInsert> {
                   color: Theme.of(context).colorScheme.tertiaryContainer,
                   child: Center(
                     child: imageFile == null
-                    ? const Text('Image is not selected')
+                    ? Text('input image data')//Image.memory(img)
                     : Image.file(File(imageFile!.path)),
                   ),
                 ),
@@ -261,8 +264,8 @@ class _MyListInsertState extends State<MyListInsert> {
 
                 // insert button
                 ElevatedButton(
-                  onPressed: () => insertData(), 
-                  child: const Text('입력'),
+                  onPressed: () => updateData(), 
+                  child: const Text('수정'),
                 ),
               ],
             ),

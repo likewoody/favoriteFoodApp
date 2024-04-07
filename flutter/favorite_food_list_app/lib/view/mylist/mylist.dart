@@ -6,6 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
+/*
+    Date: 2024-04-07
+    Author : Woody Jo
+    Description : Favorite Food Mylist View Main Page with SQLite 
+*/
+
 class MyList extends StatefulWidget {
   const MyList({super.key});
 

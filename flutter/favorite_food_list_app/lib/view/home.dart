@@ -1,6 +1,6 @@
 import 'package:favorite_food_list_app/view/%08mylist/mylist.dart';
 import 'package:favorite_food_list_app/view/world_list.dart';
-import 'package:favorite_food_list_app/view/ourlist/our_list.dart';
+import 'package:favorite_food_list_app/view/ourlist/ourlist.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

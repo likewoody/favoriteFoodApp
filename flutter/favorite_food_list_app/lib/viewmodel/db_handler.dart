@@ -2,6 +2,12 @@ import 'package:favorite_food_list_app/model/foodList.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+/*
+    Date: 2024-04-07
+    Author : Woody Jo
+    Description : Favorite Food Mylist SQLite connect 
+*/
+
 class DataBaseHandler{
 
   Future<Database> initializeDB() async{

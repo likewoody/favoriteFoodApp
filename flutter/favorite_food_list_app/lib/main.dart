@@ -6,6 +6,12 @@ import 'package:get/get.dart';
 
 import 'view/home.dart';
 
+/*
+    Date: 2024-04-05
+    Author : Woody Jo
+    Description : Favorite Food List App for 개인 프로젝트
+*/
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
