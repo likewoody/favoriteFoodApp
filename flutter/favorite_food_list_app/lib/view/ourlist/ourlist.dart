@@ -21,6 +21,8 @@ class OurList extends StatefulWidget {
 
 class _OurListState extends State<OurList> {
 
+  
+
   // Property
   late List data;
 
@@ -144,10 +146,10 @@ class _OurListState extends State<OurList> {
                         color: Theme.of(context).colorScheme.secondaryContainer,
                         child: Row(
                           children: [
-                            Image.network(
-                              data[index]['imgPath'],
-                              width: 100,
-                            ),
+                            // Image.network(
+                            //   data[index]['img'],
+                            //   width: 100,
+                            // ),
                             Column(
                               children: [
                                 Row(

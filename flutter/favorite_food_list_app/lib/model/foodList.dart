@@ -23,6 +23,7 @@ class FoodList{
     this.img,
   });
 
+
   FoodList.fromMap(Map<String, dynamic> res)
     : id = res['id'],
       name = res['name'],
@@ -33,4 +34,6 @@ class FoodList{
       rate = res['rate'],
       inputDate = res['inputDate'],
       img = res['img'];
+
+  
 }
