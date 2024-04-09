@@ -1,11 +1,10 @@
 ### 맛집 리스트 앱 만들기 
 
-📆 2024.04.06 ~ 2024.04.07
+📆 2024.04.06 ~ 2024.04.09
 
 <br><br>
 
-![제목을-입력해주세요_-001](https://github.com/likewoody/favoriteFoodApp/assets/151493474/bceaf26d-e03e-40d7-87be-63c69771bad4)
-
+![Group 2](https://github.com/likewoody/favoriteFoodApp/assets/151493474/77de1cba-4d78-4e45-9012-d47d4dbe6775)
 
 <br>
 
@@ -16,7 +15,7 @@
 
 
 
-
+### DB 사용
 1. 나의 맛집 리스트
 - SQLite
 
@@ -56,6 +55,10 @@ latlong2: ^0.9.1
 
 #### HTTP
 http: ^1.2.1
+
+<br><br>
+
+dio: ^5.4.2+1
 <br><br>
 
 #### SQLite
@@ -73,8 +76,7 @@ firebase_analytics: ^10.10.0
 
 firebase_database: ^10.5.0
 
-<br><br>
-dio: ^5.4.2+1
+
 <br><br>
 path: ^1.9.0
 <br><br>
