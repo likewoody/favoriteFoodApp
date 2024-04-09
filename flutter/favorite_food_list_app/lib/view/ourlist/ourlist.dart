@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:favorite_food_list_app/view/ourlist/ourlist_gps.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_insert.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_update.dart';
 import 'package:flutter/material.dart';
@@ -95,38 +96,23 @@ class _OurListState extends State<OurList> {
         ? ListView.builder(
           itemCount: data.length,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Get.to(
-                  const OurListUpdate(),
-                  arguments: [
-                    data[index]['name'],
-                    data[index]['phone'],
-                    data[index]['lat'],
-                    data[index]['lng'],
-                    data[index]['rate'],
-                    data[index]['id'],
-                  ],
-                )!.then((value) {
-                  data = [];
-                  getJSONData();
-                });
-              },
-              child: Slidable(
-                endActionPane: ActionPane(
-                  motion: const BehindMotion(), 
-                  children: [
-                    SlidableAction(
-                      icon: Icons.delete_forever,
-                      label: '삭제',
-                      backgroundColor: Theme.of(context).colorScheme.error,
-                      foregroundColor: Theme.of(context).colorScheme.onError,
-                      onPressed: (context) => deleteData(data[index]['id']),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,5,0,5),
+            return Slidable(
+              endActionPane: ActionPane(
+                motion: const BehindMotion(), 
+                children: [
+                  SlidableAction(
+                    icon: Icons.delete_forever,
+                    label: '삭제',
+                    backgroundColor: Theme.of(context).colorScheme.error,
+                    foregroundColor: Theme.of(context).colorScheme.onError,
+                    onPressed: (context) => deleteData(data[index]['id']),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0,5,0,5),
+                child: Container(
+                  height: 150,
                   child: GestureDetector(
                     onTap: () => Get.to(
                       const OurListUpdate(),
@@ -135,59 +121,64 @@ class _OurListState extends State<OurList> {
                         data[index]['phone'],
                         data[index]['lat'],
                         data[index]['lng'],
-                        data[index]['imgPath'],
+                        data[index]['img'],
                         data[index]['rate'],
+                        data[index]['imgPath'],
                         data[index]['id'],
                       ],
                     ),
-                    child: Container(
-                      height: 150,
-                      child: Card(
-                        color: Theme.of(context).colorScheme.secondaryContainer,
-                        child: Row(
-                          children: [
-                            // Image.network(
-                            //   data[index]['img'],
-                            //   width: 100,
-                            // ),
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              '이름 :\n',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text('  ${data[index]['name']}\n'),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                                '  전화번호 :',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text('  ${data[index]['phone']}')
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    
-                                    
-                                  ],
-                                )
-                              ],
+                    onLongPress: () => Get.to(
+                      const OurlistGPS(),
+                      arguments: [
+                        data[index]['name'],
+                        data[index]['lat'],
+                        data[index]['lng'],
+                      ]
+                    ),
+                    child: Card(
+                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: Image.network(
+                                data[index]['imgPath'],
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    '\n이름 :\n',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text('\n ${data[index]['name']}\n'),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                      '\n전화번호 :',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text('\n ${data[index]['phone']}')
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),

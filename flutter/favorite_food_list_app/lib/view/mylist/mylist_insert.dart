@@ -10,8 +10,7 @@ import 'package:image_picker/image_picker.dart';
 /*
     Date: 2024-04-07
     Author : Woody Jo
-    Description : Favorite Food Mylist View insert Page with SQLite DB
-                  and insert image
+    Description : Favorite Food Mylist View insert Page with SQLite
 */
 
 class MyListInsert extends StatefulWidget {
@@ -25,11 +24,6 @@ class _MyListInsertState extends State<MyListInsert> {
 
   // Property
   late DataBaseHandler handler;
-  late String name;
-  late String phone;
-  late String lat;
-  late String lng;
-  late String rate;
   late String inputDate;
 
   late TextEditingController nameController;
@@ -51,11 +45,6 @@ class _MyListInsertState extends State<MyListInsert> {
     lngController = TextEditingController();
     rateController = TextEditingController();
 
-    name = '';
-    phone = '';
-    lat = '';
-    lng = '';
-    rate = '';
     inputDate = '';
   }
 
@@ -167,7 +156,7 @@ class _MyListInsertState extends State<MyListInsert> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   child: Center(
                     child: imageFile == null
                     ? const Text('Image is not selected')

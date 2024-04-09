@@ -116,7 +116,6 @@ class _MyListState extends State<MyList> {
                     ),
                     child: Container(
                       height: 150,
-                      
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0,5,0,5),
                         child: Card(

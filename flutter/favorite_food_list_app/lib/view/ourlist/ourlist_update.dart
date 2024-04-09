@@ -1,24 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
 class OurListUpdate extends StatefulWidget {
-  const OurListUpdate({super.key});
+
+  const OurListUpdate({super.key, imgPath});
 
   @override
   State<OurListUpdate> createState() => _OurListUpdateState();
 }
-
-
 /*
-    Date: 2024-04-07
+    Date: 2024-04-09
     Author : Woody Jo
     Description : Favorite Food Ourlist View Update Page with MySQL
-                  update image as well
 */
 
 class _OurListUpdateState extends State<OurListUpdate> {
@@ -26,9 +24,9 @@ class _OurListUpdateState extends State<OurListUpdate> {
 
   // Property
   late String inputDate;
+  late String imgName;
   late String imgPath;
-
-  late int id;
+  late String id;
 
   late TextEditingController nameController;
   late TextEditingController phoneController;
@@ -53,13 +51,12 @@ class _OurListUpdateState extends State<OurListUpdate> {
     phoneController.text = values[1];
     latController.text = values[2];
     lngController.text = values[3];
-    imgPath = values[4];
+    imgName = values[4];
     rateController.text = values[5];
-    id = values[6];
+    imgPath = values[6];
+    id = values[7].toString();
 
-    
   }
-
 
   // ---- Functions ----
   // 이미지 선택
@@ -73,14 +70,41 @@ class _OurListUpdateState extends State<OurListUpdate> {
     }
   }
 
-  updateData() async{
+  // image save on server
+  imageInsert() async {
+    dio.Dio dioImg = dio.Dio();
+    // imgFile name
+    File imgFile = File(imageFile!.path);
 
+    // image update 준비, fromMap({db컬럼명:     fromFile(이미지 파일, 이미지 파일명)}) 
+    final data = dio.FormData.fromMap({
+      'img': await dio.MultipartFile.fromFile(imgFile.path, filename: imgName),
+    });
+
+    // post = server에 [post]하는 것
+    dio.Response response = await dioImg.post('http://localhost:8080/Flutter/JSP/image.jsp', data: data);
+
+    // Json Decode
+    final responseData = jsonDecode(response.data);
+    // {}의 result만 가져오기
+    final result = responseData['result'];
+
+    print(result);    
+    
+    if (result == "OK") {
+      print("image upload succeed...");
+    }else {
+      print("image upload failed...");
+    }
+  }
+
+  Future<void> updateData() async{
     var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistUpdate.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&rate=${rateController.text}&inputDate=${_now()}&id=$id');
     var response = await http.get(url);
 
     var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
     var result = dataConvertedJSON['result'];
-    setState(() {});
+    
     if (result == 'OK') {
       _showDialog();
     }
@@ -161,7 +185,7 @@ class _OurListUpdateState extends State<OurListUpdate> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   child: Center(
                     child: imageFile == null
                     ? Image.network(imgPath)
@@ -259,7 +283,9 @@ class _OurListUpdateState extends State<OurListUpdate> {
 
                 // insert button
                 ElevatedButton(
-                  onPressed: () => updateData(), 
+                  onPressed: () async{
+                    await imageInsert();
+                  }, 
                   child: const Text('수정'),
                 ),
               ],

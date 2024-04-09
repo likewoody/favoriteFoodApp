@@ -11,7 +11,6 @@ import 'package:image_picker/image_picker.dart';
     Date: 2024-04-07
     Author : Woody Jo
     Description : Favorite Food Mylist View Update Page with SQLite
-                  update image as well
 */
 
 
@@ -172,7 +171,7 @@ class _MyListUpdateState extends State<MyListUpdate> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   child: Center(
                     child: imageFile == null
                     ? Image.memory(img)

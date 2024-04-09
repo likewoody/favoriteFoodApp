@@ -1,10 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+
+/*
+    Date: 2024-04-09
+    Author : Woody Jo
+    Description : Favorite Food Ourlist View insert Page with MySQL
+                  and insert image by MultipartRequest
+*/
+
 
 class OurListInsert extends StatefulWidget {
   const OurListInsert({super.key});
@@ -23,8 +32,8 @@ class _OurListInsertState extends State<OurListInsert> {
   late TextEditingController latController;
   late TextEditingController lngController;
   late TextEditingController rateController;
-  late var getId;
-  late String imgPath;
+  late Random rand;
+  late String imgName;
 
   XFile? imageFile;
   final ImagePicker picker = ImagePicker();
@@ -37,9 +46,7 @@ class _OurListInsertState extends State<OurListInsert> {
     latController = TextEditingController();
     lngController = TextEditingController();
     rateController = TextEditingController();
-    inputDate = '';
-    getId = '';
-    imgPath = '';
+    rand = Random();
   }
 
   // 이미지 선택
@@ -53,63 +60,54 @@ class _OurListInsertState extends State<OurListInsert> {
     }
   }
 
+  // image save on server
   imageInsert() async {
     dio.Dio dioImg = dio.Dio();
     // imgFile name
     File imgFile = File(imageFile!.path);
-    imgPath = nameController.text.trim() + latController.text.trim() + ".jpg";
-    print(imgPath);
+
+    // image 이름 만들기
+    imgName = nameController.text + rand.nextInt(10000).toString() + ".jpg";
 
     // image update 준비, fromMap({db컬럼명:     fromFile(이미지 파일, 이미지 파일명)}) 
     final data = dio.FormData.fromMap({
-      'img': await dio.MultipartFile.fromFile(imgFile.path, filename: imgPath),
+      'img': await dio.MultipartFile.fromFile(imgFile.path, filename: imgName),
     });
 
-    // post = server에 업로드하는 것
+    // post = server에 [post]하는 것
     dio.Response response = await dioImg.post('http://localhost:8080/Flutter/JSP/image.jsp', data: data);
 
     // Json Decode
     final responseData = jsonDecode(response.data);
     // {}의 result만 가져오기
     final result = responseData['result'];
+
     print(result);    
+    
     if (result == "OK") {
-      await selectId();
       print("image upload succeed...");
     }else {
       print("image upload failed...");
     }
   }
 
-  insertData() async{
-    var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistInsert.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&imgPath=${imgPath}&rate=${rateController.text}&inputDate=${_now()}');
+  Future<void> insertData() async{
+    // image Path 만들기
+    String imgPath = "http://localhost:8080/images/$imgName";
+
+    var url = Uri.parse('http://localhost:8080/Flutter/JSP/favoritefoodlistInsert.jsp?name=${nameController.text}&phone=${phoneController.text}&lat=${latController.text}&lng=${lngController.text}&imgName=$imgName&rate=${rateController.text}&inputDate=${_now()}&imgPath=$imgPath');
     var response = await http.get(url);
 
     var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
     var result = dataConvertedJSON['result'];
-    setState(() {});
+
     if (result == 'OK') {
       _showDialog();
       print("insert data succeed...");
     }else {
-      print("insert data ${getId}...");
+      print("insert data failed...");
     }
   }
-
-  selectId() async{
-    var url = Uri.parse('http://localhost:8080/Flutter/JSP/insertSelect.jsp?imgPath=${imgPath}');
-    var response = await http.get(url);
-
-    var dataConvertedJSON = json.decode(utf8.decode(response.bodyBytes));
-    var result = dataConvertedJSON['result'];
-    setState(() {});
-    if (result == 'error') {
-      getId = "failed";
-    }else {
-      getId = result[0]["id"];
-    }
-  }
-
 
   // ---- date format ----
   String _now() {
@@ -287,7 +285,7 @@ class _OurListInsertState extends State<OurListInsert> {
                 ElevatedButton(
                   onPressed: () async{
                     await imageInsert();
-                    // insertData();
+                    await insertData();
                   }, 
                   child: const Text('입력'),
                 ),

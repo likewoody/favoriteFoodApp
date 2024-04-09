@@ -197,7 +197,7 @@ class _WorldLIstUpdateState extends State<WorldLIstUpdate> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   child: Center(
                     child: imageFile == null
                     ? Image.network(img)

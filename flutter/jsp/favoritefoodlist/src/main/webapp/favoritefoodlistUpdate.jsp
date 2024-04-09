@@ -31,7 +31,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 		
-		String query = "update list set name=?, phone=?, lat=?, lng=?, rate=?, inputDate=?  where id = ?";
+		String query = "update list set name=?, phone=?, lat=?, lng=?, rate=?, inputDate=? where id = ?";
 		ps = con.prepareStatement(query);
 		
 		ps.setString(1, name);
@@ -40,9 +40,8 @@
 		ps.setString(4, lng);
 		ps.setString(5, rate);
 		ps.setString(6, inputDate);
-		ps.setString(7, id);
-		
-		
+		ps.setInt(7, Int.parse(id));
+
 		ps.executeUpdate();
 %>
 		{"result":"OK"}
