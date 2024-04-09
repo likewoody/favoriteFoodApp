@@ -43,7 +43,6 @@ image_picker: ^1.0.7
 get: ^4.6.6
 
 <br>
-<br>
 
 #### GPS
 geocoding: ^3.0.0
@@ -61,15 +60,8 @@ http: ^1.2.1
 
 #### SQLite
 sqflite: ^2.3.3
-<br><br><br>
+<br><br>
 
-path: ^1.9.0
-<br><br>
-flutter_slidable: ^3.1.0
-<br>
-<br>
-shared_preferences: ^2.2.2
-<br><br>
 #### Firebase 
 firebase_storage: ^11.7.0
 
@@ -83,3 +75,9 @@ firebase_database: ^10.5.0
 
 <br><br>
 dio: ^5.4.2+1
+<br><br>
+path: ^1.9.0
+<br><br>
+flutter_slidable: ^3.1.0
+<br><br>
+shared_preferences: ^2.2.2
