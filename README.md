@@ -35,9 +35,11 @@
 
 📦
 <br>
+#### Image
 image_picker: ^1.0.7
 <br>
 
+#### Get
 get: ^4.6.6
 
 <br>
@@ -59,7 +61,8 @@ http: ^1.2.1
 
 #### SQLite
 sqflite: ^2.3.3
-<br><br>
+<br><br><br>
+
 path: ^1.9.0
 <br><br>
 flutter_slidable: ^3.1.0
@@ -77,3 +80,6 @@ firebase_core: ^2.28.0
 firebase_analytics: ^10.10.0
 
 firebase_database: ^10.5.0
+
+<br><br>
+dio: ^5.4.2+1
