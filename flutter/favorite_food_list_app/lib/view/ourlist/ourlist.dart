@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:favorite_food_list_app/mylocation.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_gps.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_insert.dart';
 import 'package:favorite_food_list_app/view/ourlist/ourlist_update.dart';
@@ -81,6 +82,10 @@ class _OurListState extends State<OurList> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          IconButton(
+            onPressed: () => Get.to(const Mylocation()), 
+            icon: const Icon(Icons.map_outlined)
+          ),
           IconButton(
             onPressed: () => Get.to(const OurListInsert())!.then((value) {
               // 화면에 addAll 해줄 것이기 때문에 초기화 후 add

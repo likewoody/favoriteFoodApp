@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_food_list_app/model/foodList.dart';
+import 'package:favorite_food_list_app/mylocation.dart';
 import 'package:favorite_food_list_app/view/worldlist/worldlist_gps.dart';
 import 'package:favorite_food_list_app/view/worldlist/worldlist_insert.dart';
 import 'package:favorite_food_list_app/view/worldlist/worldlist_update.dart';
@@ -136,6 +137,10 @@ class _WorldListState extends State<WorldList> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          IconButton(
+            onPressed: () => Get.to(const Mylocation()), 
+            icon: const Icon(Icons.map_outlined)
+          ),
           IconButton(
             onPressed: () => Get.to(const WorldListInsert()), 
             icon: const Icon(Icons.add_outlined)

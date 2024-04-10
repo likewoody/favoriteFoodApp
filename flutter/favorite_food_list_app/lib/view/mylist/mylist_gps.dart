@@ -1,3 +1,4 @@
+import 'package:favorite_food_list_app/vm/vm_mylist_getx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,42 +12,33 @@ import 'package:latlong2/latlong.dart' as latlng;
                   datas and then show GPS map 
 */
 
-class MylistGPS extends StatefulWidget {
-  const MylistGPS({super.key});
+class MylistGPS extends StatelessWidget {
+  MylistGPS({super.key});
 
-  @override
-  State<MylistGPS> createState() => _MylistGPSState();
-}
-
-class _MylistGPSState extends State<MylistGPS> {
-
+  // --- Property ---
+  final controller = Get.put(VMMylistGetX());
+  final MapController mapController = MapController(); // flutter_map
+  Position? currentPosition;
+  String name = '';
   var values = Get.arguments ?? '';
 
-  late Position currentPosition;
-  late String name;
-  late double lat;
-  late double lng;
-  late MapController mapController; // flutter_map
 
-  @override
-  void initState() {
-    super.initState();
+
+  setArgu(){
     name = values[0];
-    lat = double.parse(values[1]);
-    lng = double.parse(values[2]);
-    mapController = MapController();  
+    controller.lat = double.parse(values[1]);
+    controller.lng = double.parse(values[2]);
   }
 
-  // ---- Functions -----
+  
 
-  // ============================
-  // --------- 화면 구상 ---------
-  // ============================
+  // --- Function ---
   Widget flutterMap() {
+    setArgu();
     return FlutterMap(
       mapController: mapController,
       options: MapOptions(
-        initialCenter: latlng.LatLng(lat, lng),
+        initialCenter: latlng.LatLng(controller.lat, controller.lng),
         initialZoom: 17.0
       ), 
       children: [
@@ -58,7 +50,7 @@ class _MylistGPSState extends State<MylistGPS> {
             Marker(
               width: 80,
               height: 80,
-              point: latlng.LatLng(lat, lng), 
+              point: latlng.LatLng(controller.lat, controller.lng), 
               child: Column(
                 children: [
                   Text(
@@ -81,8 +73,6 @@ class _MylistGPSState extends State<MylistGPS> {
       ],
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {

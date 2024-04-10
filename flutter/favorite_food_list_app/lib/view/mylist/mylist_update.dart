@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:favorite_food_list_app/model/foodList.dart';
-import 'package:favorite_food_list_app/viewmodel/db_handler.dart';
+import 'package:favorite_food_list_app/vm/db_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
