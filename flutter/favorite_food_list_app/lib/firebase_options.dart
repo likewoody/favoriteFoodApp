@@ -53,7 +53,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDJGkXR7Arj6eg03C1DGaJ0hrLBSo3VlgA',
+    apiKey: '',
     appId: '1:775083983119:ios:2b275a31137e29ae913e7a',
     messagingSenderId: '775083983119',
     projectId: 'favoritefoodlist',
