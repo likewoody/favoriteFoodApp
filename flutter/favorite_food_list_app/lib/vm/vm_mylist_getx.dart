@@ -23,15 +23,15 @@ class VMMylistGetX extends GetxController{
     update();
   }
 
-  // // MyList Insert
-  // // image choose
-  // getImageFromGallery(imageSource) async{
-  //   final XFile? pickedFile = await picker.pickImage(source: imageSource);
-  //   if (pickedFile == null) {
-  //     imageFile = null;
-  //   } {
-  //     imageFile = XFile(pickedFile!.path);
-  //   }
-  //   update();
-  // }
+  // MyList Insert
+  // image choose
+  getImageFromGallery(imageSource) async{
+    final XFile? pickedFile = await picker.pickImage(source: imageSource);
+    pickedFile == null 
+    ? imageFile = null
+    : imageFile = XFile(pickedFile.path);
+    update();
+  }
+
+  
 }

@@ -1,8 +1,10 @@
 import 'package:favorite_food_list_app/firebase_options.dart';
+import 'package:favorite_food_list_app/vm/vm_ourlist_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import 'view/home.dart';
 
@@ -41,7 +43,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 207, 72, 0)),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: ChangeNotifierProvider(
+        create: (context) => VMOurListProvider(),
+        child: const Home(),
+      ),
     );
   }
 }

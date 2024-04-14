@@ -29,7 +29,7 @@ class MyList extends StatelessWidget {
                 icon: const Icon(Icons.map_outlined)
               ),
               IconButton(
-                onPressed: () => Get.to(MyListInsert())!.then((value) => controller.rebuildData()), 
+                onPressed: () => Get.to(const MyListInsert())!.then((value) => controller.rebuildData()), 
                 icon: const Icon(Icons.add_outlined)
               ),
             ],
